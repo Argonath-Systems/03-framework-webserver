@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.argonathsystems</groupId>
+        <artifactId>argonath-mithril-forge-core</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../01-platform-core/pom.xml</relativePath>
+    </parent>
+
+    <groupId>com.argonathsystems.framework</groupId>
+    <artifactId>argonath-shire-webserver</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <name>ArgonathSystems WebServer Framework</name>
+    <description>Platform-agnostic web server abstraction for HTTP APIs</description>
+
+    <dependencies>
+        <!-- Core Framework -->
+        <dependency>
+            <groupId>com.argonathsystems.framework</groupId>
+            <artifactId>argonath-bag-end-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <!-- Accessor API (for integration with other frameworks) -->
+        <dependency>
+            <groupId>com.argonathsystems.framework</groupId>
+            <artifactId>argonath-grey-havens-accessor</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
