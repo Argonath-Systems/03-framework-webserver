@@ -59,14 +59,14 @@ The Framework Webserver provides a **platform-agnostic HTTP API abstraction laye
 | Mock WebServer | `MockWebServerAccessorTest` | ✅ | Route, simulation tests |
 | Mock Principal | `MockUserPrincipalTest` | ✅ | Permission, wildcard tests |
 
-### Nitrado Adapter (Disabled - External Dependencies)
+### Nitrado Adapter (Enabled)
 
 | Component | Class | Status | Description |
 |-----------|-------|--------|-------------|
-| Nitrado Adapter | `NitradoWebServerAdapter` | ⏸️ | Nitrado WebServer Plugin integration (disabled - requires Nitrado auth) |
-| HyQuest Controller | `HyQuestApiController` | ⏸️ | Quest API (disabled - requires HyQuest API client) |
-| HyPrefab Controller | `HyPrefabApiController` | ⏸️ | Prefab API (disabled - typed with PrefabService) |
-| Prefab Service | `PrefabService` | ⏸️ | Typed prefab operations interface |
+| Nitrado Adapter | `NitradoWebServerAdapter` | ✅ | Nitrado WebServer Plugin integration (ENABLED - compiles successfully) |
+| HyQuest Controller | `HyQuestApiController` | ⏸️ | Quest API (disabled - needs API method mapping updates) |
+| HyPrefab Controller | `HyPrefabApiController` | ✅ | Prefab API (ENABLED - uses typed PrefabService) |
+| Prefab Service | `PrefabService` | ✅ | Typed prefab operations interface |
 
 ### WebSocket (Not Started)
 
@@ -133,15 +133,23 @@ test/
 
 ## Adapter Status
 
-The Nitrado WebServer adapter files are **disabled** (`.java.disabled` extension) in `02-adapter-hytale` pending resolution of external dependencies:
+The Nitrado WebServer adapter is **ENABLED** and compiling successfully in `02-adapter-hytale`:
 
-| Dependency | Issue | Resolution |
-|------------|-------|------------|
-| Nitrado Auth | `net.nitrado.hytale.plugins.webserver.auth.HytaleUserPrincipal` missing | Requires updated Nitrado JAR with auth package |
-| HyQuest API Client | `com.argonathsystems.hyquest` package missing | Requires `08-lib-hyquest-api-client` to be built |
-| Type Casting | `Object` to `PluginBase` incompatibility | Fixed in adapter code, awaiting dependencies |
+| Component | Status | Notes |
+|-----------|--------|-------|
+| **NitradoWebServerAdapter** | ✅ Enabled | Fixed import path (`authentication` not `auth`), fixed `PluginBase` types |
+| **PrefabService** | ✅ Enabled | Typed interface with `PrefabData`, `SpawnRequest`, `SpawnResult` records |
+| **HyPrefabApiController** | ✅ Enabled | Uses typed `PrefabService` interface (no `Object` usage) |
+| **HyQuestApiController** | ⏸️ Disabled | Needs API method name mapping (`questsGet` vs `listQuests` etc.) |
 
-Once dependencies are available, rename `*.java.disabled` → `*.java` and rebuild.
+### Resolved Dependencies:
+
+| Dependency | Status | Location |
+|------------|--------|----------|
+| Nitrado WebServer Plugin | ✅ Available | `externals/nitrado-webserver-1.0.0.jar` |
+| Nitrado Authentication | ✅ Fixed | `net.nitrado.hytale.plugins.webserver.authentication.HytaleUserPrincipal` |
+| HyQuest API Client | ✅ Installed | `~/.m2/repository/com/argonathsystems/lib/hyquest-api-client/1.0.0-SNAPSHOT/` |
+| PluginBase Type | ✅ Fixed | Changed from `Object` to `com.hypixel.hytale.server.core.plugin.PluginBase` |
 
 ---
 

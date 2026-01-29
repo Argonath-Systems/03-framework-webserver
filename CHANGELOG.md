@@ -23,9 +23,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `MockWebServerAccessor` with route capture and request simulation
   - `MockUserPrincipal` with permission testing and wildcard support
 - **Unit test coverage** for all mock implementations
+- **Nitrado adapter integration** (02-adapter-hytale):
+  - `NitradoWebServerAdapter` - Production-ready Nitrado WebServer Plugin adapter
+  - `HyPrefabApiController` - REST API for HyPrefab visual designer (typed with `PrefabService`)
+  - `PrefabService` - Typed interface for prefab operations
 - Comprehensive Javadoc documentation
 - README with usage examples and architecture diagrams
 - Library catalog entry (LIB-046)
 
 ### Fixed
 - Eliminated all `Object` usages in adapter layer with typed interfaces
+- Fixed Nitrado authentication import path (`authentication` not `auth`)
+- Fixed `PluginBase` type casting (changed from `Object` to proper type)
+- Installed HyQuest API client dependency to local Maven repository
