@@ -1,0 +1,18 @@
+{
+  "Group": "ArgonathSystems",
+  "Name": "WebServerFramework",
+  "Version": "1.0.0-SNAPSHOT",
+  "Description": "Embedded web server framework for admin panels and APIs",
+  "Authors": [
+    {
+      "Name": "Argonath Systems Team"
+    }
+  ],
+  "ServerVersion": "*",
+  "Dependencies": {
+    "ArgonathSystems:CoreLib": "*"
+  },
+  "OptionalDependencies": {},
+  "DisabledByDefault": false,
+  "IncludesAssetPack": false
+}
