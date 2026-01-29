@@ -1,6 +1,6 @@
 com/argonathsystems/framework/webserver/HttpMethod.class
+com/argonathsystems/framework/webserver/UserPrincipal.class
 com/argonathsystems/framework/webserver/HttpResponse.class
 com/argonathsystems/framework/webserver/RouteHandler.class
 com/argonathsystems/framework/webserver/WebServerAccessor.class
 com/argonathsystems/framework/webserver/HttpRequest.class
-com/argonathsystems/framework/webserver/UserPrincipal.class
