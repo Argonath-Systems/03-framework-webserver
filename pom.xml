@@ -17,6 +17,10 @@
     <name>ArgonathSystems WebServer Framework</name>
     <description>Platform-agnostic web server abstraction for HTTP APIs</description>
 
+    <properties>
+        <jjwt.version>0.12.5</jjwt.version>
+    </properties>
+
     <dependencies>
         <!-- Core Framework -->
         <dependency>
@@ -30,6 +34,31 @@
             <groupId>com.argonathsystems.framework</groupId>
             <artifactId>argonath-grey-havens-accessor</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <!-- JWT Support -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-gson</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- JSON (Gson) - provided by parent -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
         </dependency>
 
         <!-- Testing -->
