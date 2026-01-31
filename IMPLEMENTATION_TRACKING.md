@@ -1,9 +1,9 @@
 # Framework Webserver - Implementation Tracking
 
 > **Module**: `03-framework-webserver`  
-> **Status**: 🟢 COMPLETE (Interfaces + Mocks + Nitrado Adapter)  
-> **Last Updated**: 2026-01-29  
-> **Version**: 1.0.0
+> **Status**: 🟢 COMPLETE (Interfaces + Mocks + Nitrado Adapter + Auth)  
+> **Last Updated**: 2026-01-31  
+> **Version**: 1.1.0
 
 ---
 
@@ -22,9 +22,9 @@ The Framework Webserver provides a **platform-agnostic HTTP API abstraction laye
 | HTTP Interfaces | 6 | 6 | 100% |
 | Mock Implementations | 4 | 4 | 100% |
 | Unit Tests | 4 | 4 | 100% |
+| Auth System | 8 | 8 | 100% |
 | WebSocket Support | 0 | 3 | 0% |
-| Security/Auth | 0 | 3 | 0% |
-| **Overall** | **14** | **20** | **70%** |
+| **Overall** | **22** | **25** | **88%** |
 
 ---
 
@@ -40,6 +40,31 @@ The Framework Webserver provides a **platform-agnostic HTTP API abstraction laye
 | Route Handler | `RouteHandler` | ✅ | Functional interface for request handling |
 | WebServer Accessor | `WebServerAccessor` | ✅ | Accessor interface for route management |
 | User Principal | `UserPrincipal` | ✅ | Authentication/authorization abstraction |
+
+### Auth System (Complete - Phase 6)
+
+| Component | Class | Status | Description |
+|-----------|-------|--------|-------------|
+| Permission Enum | `DesignerPermission` | ✅ | Bitfield permissions for Designer portal |
+| Role Enum | `DesignerRole` | ✅ | Role presets (Quest Designer, Prefab Builder, etc.) |
+| JWT Service | `JwtService` | ✅ | Token generation and validation |
+| Discord OAuth | `DiscordOAuthService` | ✅ | Discord OAuth2 integration |
+| User Entity | `DesignerUser` | ✅ | Designer portal user with Discord/player linking |
+| Link Code Manager | `LinkCodeManager` | ✅ | In-game account linking codes |
+| Auth Controller | `AuthController` | ✅ | REST endpoints for auth flow |
+| Link Command | `DesignerLinkCommand` | ✅ | `/designer link` in-game command |
+
+### Auth DTOs (Complete)
+
+| Component | Class | Status | Description |
+|-----------|-------|--------|-------------|
+| Discord Callback | `DiscordCallbackRequest` | ✅ | OAuth callback request |
+| Auth Response | `AuthResponse` | ✅ | User + tokens response |
+| Auth User | `AuthUser` | ✅ | User details DTO |
+| Auth Tokens | `AuthTokens` | ✅ | JWT token pair |
+| Refresh Request | `RefreshRequest` | ✅ | Token refresh request |
+| Link Code Response | `LinkCodeResponse` | ✅ | Generated link code |
+| Link Status | `LinkStatusResponse` | ✅ | Account link status |
 
 ### Mock Implementations (Complete)
 

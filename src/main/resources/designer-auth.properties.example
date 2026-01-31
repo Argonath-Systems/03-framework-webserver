@@ -1,0 +1,27 @@
+# Argonath Designer Authentication Configuration
+# Copy this to designer-auth.properties and fill in your values
+
+# Discord OAuth2
+discord.client.id=YOUR_DISCORD_APP_ID
+discord.client.secret=YOUR_DISCORD_CLIENT_SECRET
+discord.public.key=YOUR_DISCORD_PUBLIC_KEY
+
+# Discord Guild (Server)
+discord.guild.id=YOUR_DISCORD_GUILD_ID
+
+# Discord Role ID Mappings
+# Get these from Discord: Server Settings > Roles > Right-click > Copy ID
+discord.role.quest_designer=
+discord.role.prefab_builder=
+discord.role.worldgen_builder=
+discord.role.npc_designer=
+discord.role.ui_designer=
+discord.role.senior_builder=
+discord.role.admin=
+
+# JWT Configuration (generate secure 256-bit secrets)
+# Use: openssl rand -hex 32
+jwt.access.secret=
+jwt.refresh.secret=
+jwt.access.validity.ms=900000
+jwt.refresh.validity.ms=604800000

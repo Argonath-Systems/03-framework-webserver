@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-01-31
+
+### Added
+- **Designer Portal Authentication System** (Phase 6):
+  - `DesignerPermission` - Bitfield permission enum (synced with TypeScript)
+  - `DesignerRole` - Role presets (Quest Designer, Prefab Builder, Worldgen Builder, etc.)
+  - `JwtService` - JWT token generation and validation using JJWT
+  - `DiscordOAuthService` - Discord OAuth2 integration for authentication
+  - `DesignerUser` - User entity with Discord account + in-game player linking
+  - `LinkCodeManager` - Temporary link codes for in-game account linking
+  - `AuthController` - REST endpoints for auth flow (/api/v1/auth/*)
+  - `DesignerLinkCommand` - `/designer link <code>` in-game command
+- **Auth DTOs**:
+  - `DiscordCallbackRequest` - OAuth callback request
+  - `AuthResponse` - User + tokens response
+  - `AuthUser` - User details for API
+  - `AuthTokens` - JWT token pair
+  - `RefreshRequest` - Token refresh request
+  - `LinkCodeResponse` - Generated link code response
+  - `LinkStatusResponse` - Account link status
+- JJWT dependency for JWT token handling
+- Gson dependency for JSON serialization
+
+### Security
+- JWT-based authentication with access and refresh tokens
+- Discord role-based authorization mapping
+- Secure link code generation (6-char, unambiguous characters, 5-min expiry)
+- Permission bitfield system matching frontend implementation
+
 ## [1.0.0] - 2026-01-29
 
 ### Added

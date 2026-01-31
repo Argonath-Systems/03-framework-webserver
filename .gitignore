@@ -1,1 +1,6 @@
 target/
+
+# Secrets - DO NOT COMMIT
+designer-auth.properties
+*.local.properties
+target
