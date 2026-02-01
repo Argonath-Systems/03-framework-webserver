@@ -2,6 +2,8 @@ package com.argonathsystems.framework.webserver.command;
 
 import com.argonathsystems.framework.accessorapi.CommandAccessor;
 import com.argonathsystems.framework.accessorapi.command.CommandSender;
+import com.argonathsystems.framework.text.Component;
+import com.argonathsystems.framework.text.Messages;
 import com.argonathsystems.framework.webserver.controller.AuthController;
 
 import java.util.UUID;
@@ -35,6 +37,36 @@ public class DesignerLinkCommand implements CommandAccessor.CommandExecutor {
     public static final String COMMAND_NAME = "designer";
     
     private final AuthController authController;
+    
+    // ==================== Message Helpers ====================
+    
+    private static void send(CommandSender sender, Component component) {
+        sender.sendMessage(Messages.legacy(component));
+    }
+    
+    private static void sendError(CommandSender sender, String message) {
+        send(sender, Messages.error(message));
+    }
+    
+    private static void sendSuccess(CommandSender sender, String message) {
+        send(sender, Messages.success(message));
+    }
+    
+    private static void sendInfo(CommandSender sender, String message) {
+        send(sender, Messages.info(message));
+    }
+    
+    private static void sendWarning(CommandSender sender, String message) {
+        send(sender, Messages.warning(message));
+    }
+    
+    private static void sendHint(CommandSender sender, String message) {
+        send(sender, Messages.hint(message));
+    }
+    
+    private static void sendHeader(CommandSender sender, String title) {
+        send(sender, Messages.header(title));
+    }
 
     /**
      * Create a designer link command.
@@ -49,7 +81,7 @@ public class DesignerLinkCommand implements CommandAccessor.CommandExecutor {
     public boolean execute(CommandSender sender, String[] args) {
         // Must be a player
         if (!sender.isPlayer()) {
-            sender.sendMessage("§cThis command can only be run by a player.");
+            sendError(sender, "This command can only be run by a player.");
             return false;
         }
 
@@ -77,8 +109,8 @@ public class DesignerLinkCommand implements CommandAccessor.CommandExecutor {
      */
     private boolean handleLink(CommandSender sender, String[] args) {
         if (args.length < 2) {
-            sender.sendMessage("§cUsage: /designer link <code>");
-            sender.sendMessage("§7Get a link code from the Designer portal.");
+            sendError(sender, "Usage: /designer link <code>");
+            sendInfo(sender, "Get a link code from the Designer portal.");
             return false;
         }
 
@@ -86,8 +118,8 @@ public class DesignerLinkCommand implements CommandAccessor.CommandExecutor {
         
         // Validate code format
         if (code.length() != 6 || !code.matches("[A-Z0-9]+")) {
-            sender.sendMessage("§cInvalid link code format.");
-            sender.sendMessage("§7Codes are 6 characters (letters and numbers).");
+            sendError(sender, "Invalid link code format.");
+            sendInfo(sender, "Codes are 6 characters (letters and numbers).");
             return false;
         }
 
@@ -98,13 +130,13 @@ public class DesignerLinkCommand implements CommandAccessor.CommandExecutor {
         boolean success = authController.linkPlayer(code, playerUuid, playerName);
 
         if (success) {
-            sender.sendMessage("§a✓ Account linked successfully!");
-            sender.sendMessage("§7Your in-game account is now connected to the Designer portal.");
-            sender.sendMessage("§7You can now access features that require account verification.");
+            sendSuccess(sender, "✓ Account linked successfully!");
+            sendInfo(sender, "Your in-game account is now connected to the Designer portal.");
+            sendInfo(sender, "You can now access features that require account verification.");
             return true;
         } else {
-            sender.sendMessage("§cLink failed. The code may be invalid or expired.");
-            sender.sendMessage("§7Generate a new code from the Designer portal and try again.");
+            sendError(sender, "Link failed. The code may be invalid or expired.");
+            sendInfo(sender, "Generate a new code from the Designer portal and try again.");
             return false;
         }
     }
@@ -115,9 +147,9 @@ public class DesignerLinkCommand implements CommandAccessor.CommandExecutor {
     private boolean handleStatus(CommandSender sender) {
         // For now, we can't check status from in-game without additional infrastructure
         // This would require querying the user store by player UUID
-        sender.sendMessage("§eLink Status");
-        sender.sendMessage("§7To check your link status, visit the Designer portal.");
-        sender.sendMessage("§7Portal: §bhttps://designer.argonath.systems");
+        sendWarning(sender, "Link Status");
+        sendInfo(sender, "To check your link status, visit the Designer portal.");
+        sendInfo(sender, "Portal: https://designer.argonath.systems");
         return true;
     }
 
@@ -125,25 +157,25 @@ public class DesignerLinkCommand implements CommandAccessor.CommandExecutor {
      * Handle /designer help
      */
     private boolean handleHelp(CommandSender sender) {
-        sender.sendMessage("§6§l━━━ Designer Commands ━━━");
+        sendHeader(sender, "Designer Commands");
         sender.sendMessage("");
-        sender.sendMessage("§e/designer link <code>");
-        sender.sendMessage("§7  Link your in-game account to the Designer portal.");
-        sender.sendMessage("§7  Get a code from the portal settings.");
+        sendHint(sender, "/designer link <code>");
+        sendInfo(sender, "  Link your in-game account to the Designer portal.");
+        sendInfo(sender, "  Get a code from the portal settings.");
         sender.sendMessage("");
-        sender.sendMessage("§e/designer status");
-        sender.sendMessage("§7  Check your account link status.");
+        sendHint(sender, "/designer status");
+        sendInfo(sender, "  Check your account link status.");
         sender.sendMessage("");
-        sender.sendMessage("§e/designer help");
-        sender.sendMessage("§7  Show this help message.");
+        sendHint(sender, "/designer help");
+        sendInfo(sender, "  Show this help message.");
         sender.sendMessage("");
-        sender.sendMessage("§7Need help? Visit §bhttps://designer.argonath.systems");
+        sendInfo(sender, "Need help? Visit https://designer.argonath.systems");
         return true;
     }
 
     private void sendUsage(CommandSender sender) {
-        sender.sendMessage("§cUsage: /designer <link|status|help>");
-        sender.sendMessage("§7Use §e/designer help §7for more information.");
+        sendError(sender, "Usage: /designer <link|status|help>");
+        sendHint(sender, "Use /designer help for more information.");
     }
 
     /**

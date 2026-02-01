@@ -35,6 +35,13 @@
             <artifactId>argonath-grey-havens-accessor</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <!-- Text Styling (Messages API) -->
+        <dependency>
+            <groupId>com.argonathsystems.framework</groupId>
+            <artifactId>argonath-elvish-text</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!-- JWT Support -->
         <dependency>

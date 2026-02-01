@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **DesignerLinkCommand Messages Migration**: Migrated all `§` color codes to `Messages` API from text-styling framework
+  - All command methods now use semantic helpers: `sendError()`, `sendSuccess()`, `sendInfo()`, `sendWarning()`, `sendHint()`, `sendHeader()`
+  - Added text-styling dependency for `Component` and `Messages` support
+
 ## [1.1.0] - 2026-01-31
 
 ### Added
